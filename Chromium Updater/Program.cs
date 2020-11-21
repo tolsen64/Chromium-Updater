@@ -13,7 +13,6 @@ namespace Chromium_Updater
 
         static void Main(string[] args)
         {
-            foreach (string s in args) Console.WriteLine(args[0]);
             const string url = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots";
             if (args.Length > 0)
             {
@@ -30,11 +29,12 @@ namespace Chromium_Updater
                     return;
                 }
             }
+            ChromeDirectory = Path.GetFullPath(ChromeDirectory); 
             LastUpdatedFile = Path.GetFullPath(Path.Combine(ChromeDirectory, "chrome-win", "lastupdate.txt"));
             string upd = File.Exists(LastUpdatedFile) ? upd = File.ReadAllText(LastUpdatedFile) : "";
-            Console.WriteLine(ChromeDirectory);
-            Console.WriteLine(LastUpdatedFile);
-            Console.ReadLine();
+            Console.WriteLine($"ChromeDirectory: {ChromeDirectory}");
+            Console.WriteLine($"LastUpdatedFile: {LastUpdatedFile}");
+            //Console.ReadLine();
 
             if (upd == "" || DateTime.Parse(upd).Date < DateTime.Now.Date)
             {
