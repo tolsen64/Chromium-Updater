@@ -20,7 +20,6 @@ namespace Chromium_Updater
                 try
                 {
                     ChromeDirectory = Path.GetFullPath(args[0]);
-                    LastUpdatedFile = Path.Combine(ChromeDirectory, "chrome-win", "lastupdate.txt");
                 }
                 catch (Exception ex)
                 {
@@ -31,10 +30,11 @@ namespace Chromium_Updater
                     return;
                 }
             }
+            LastUpdatedFile = Path.GetFullPath(Path.Combine(ChromeDirectory, "chrome-win", "lastupdate.txt"));
             string upd = File.Exists(LastUpdatedFile) ? upd = File.ReadAllText(LastUpdatedFile) : "";
             Console.WriteLine(ChromeDirectory);
             Console.WriteLine(LastUpdatedFile);
-            //Console.ReadLine();
+            Console.ReadLine();
 
             if (upd == "" || DateTime.Parse(upd).Date < DateTime.Now.Date)
             {
